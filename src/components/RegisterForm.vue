@@ -4,20 +4,20 @@
       <v-col cols="12" sm="12" md="8" lg="8">
         <h1>Register</h1>
         <v-form
-          @submit.prevent="register"
+          @submit.prevent="onSubmit"
           ref="signUpForm"
           v-model="formValidity"
         >
           <v-text-field
             label="Email"
             type="email"
-            v-model="email"
+            v-model="userInfor.email"
             outlined
             dense
             :rules="emailRules"
           />
           <v-text-field
-            v-model="firstName"
+            v-model="userInfor.firstName"
             label="First Name"
             type="name"
             outlined
@@ -25,7 +25,7 @@
             :rules="[rules.required]"
           />
           <v-text-field
-            v-model="lastName"
+            v-model="userInfor.lastName"
             label="Last Name"
             type="name"
             outlined
@@ -33,8 +33,8 @@
             :rules="[rules.required]"
           />
           <v-text-field
-            :rules="[rules.required]"
-            v-model="password"
+            :rules="[rules.required, rules.min, rules.space]"
+            v-model="userInfor.password"
             label="Password"
             outlined
             dense
@@ -43,13 +43,20 @@
             @click:append="showPassword = !showPassword"
           />
           <v-btn
+            class="register-btn"
             block
             color="#FFBF3F"
-            @click="validateForm"
+            v-on:click="validateForm"
             type="submit"
             :disabled="!formValidity"
           >
-            SIGN UP
+            <span v-if="!submitLoading">SIGN UP</span
+            ><v-progress-circular
+              class="circular"
+              indeterminate
+              color="purple"
+              v-if="submitLoading"
+            ></v-progress-circular>
           </v-btn>
           <div class="form-footer">
             <p>By clicking here you agree to our <a>Customer Agreement</a></p>
@@ -65,46 +72,49 @@
 export default {
   data: () => ({
     showPassword: false,
-    email: "",
-    firstName: "",
-    lastName: "",
-    phone: "",
-    password: "",
+    userInfor: {
+      email: "",
+      firstName: "",
+      lastName: "",
+      password: "",
+    },
     formValidity: false,
-    showIcon: false,
+    submitLoading: false,
     emailRules: [
-      (value) => value.indexOf("@") !== 0 || "Email should have a username.",
-      (value) => value.includes("@") || "Email should include an @ symbol.",
-      (value) =>
-        value.indexOf(".") - value.indexOf("@") > 1 ||
-        "Email should contain a valid domain.",
-      (value) => value.includes(".") || "Email should include a period symbol.",
-      (value) =>
-        value.indexOf(".") <= value.length - 3 ||
-        "Email should contain a valid domain extension.",
+      (v) =>
+        !v ||
+        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+        "Please enter a valid email address",
     ],
     rules: {
-      required: (value) => !!value || "The field is required.",
-      min: (v) => (v && v.length >= 8) || "Min 8 characters",
+      required: (value) => !!value || "This field is required.",
+      min: (v) => (v && v.length >= 6) || "Min 6 characters",
+      space: (v) => !/[ ]/.test(v) || "No spaces allowed",
     },
   }),
   methods: {
     validateForm() {
       this.$refs.signUpForm.validate();
+      this.submitLoading = true;
     },
-    register() {
-      this.$store
-        .dispatch("register", {
-          firstName: this.firstName,
-          lastName: this.lastName,
-          username: this.email,
-          password: this.password,
-          phone: this.phone,
-        })
-        .then(() => {
-          this.$router.push({ name: "Home" });
-        });
+    onSubmit() {
+      this.$emit("userInfor", this.userInfor);
     },
+    // register() {
+    //   this.$store
+    //     .dispatch("register", {
+    //       firstName: this.userInfor.firstName,
+    //       lastName: this.userInfor.lastName,
+    //       username: this.userInfor.email,
+    //       password: this.userInfor.password,
+    //     })
+    //     .catch((error) => {
+    //       console.log(error)
+    //     })
+    //     // .then(() => {
+    //     //   this.$router.push({ name: "Home" });
+    //     // });
+    // },
   },
 };
 </script>
@@ -125,6 +135,7 @@ h1 {
   font-size: 40px;
   color: #4f2566;
 }
+
 .form-footer {
   text-align: center;
   margin-top: 30px;
