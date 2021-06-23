@@ -17,6 +17,10 @@
         <OptionalDisplay />
       </v-col>
 
+      <!-- <v-col cols="12" md="1">
+        <SelectFilter />
+      </v-col> -->
+
       <!-- <v-col cols="12" md="1"> Rows per page: </v-col>
       <v-col cols="12" md="1">
         <SelectMaximum />

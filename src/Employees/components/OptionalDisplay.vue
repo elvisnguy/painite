@@ -1,5 +1,5 @@
 <template>
-  <v-menu
+  <!-- <v-menu
     v-model="menu"
     :close-on-content-click="false"
     :nudge-width="200"
@@ -9,10 +9,6 @@
       <v-btn icon v-bind="attrs" v-on="on" x-large>
         <v-icon color="orange darken-2"> mdi-cog </v-icon>
       </v-btn>
-
-      <!-- <v-btn icon color="pink">
-        <v-icon>mdi-heart</v-icon>
-      </v-btn> -->
     </template>
 
     <v-card>
@@ -59,7 +55,24 @@
         <v-btn color="primary" text @click="menu = false"> Save </v-btn>
       </v-card-actions>
     </v-card>
-  </v-menu>
+  </v-menu> -->
+  <v-select
+    v-model="selectedHeaders"
+    :items="headers"
+    label="Select Columns"
+    multiple
+    outlined
+    return-object
+  >
+    <template v-slot:selection="{ item, index }">
+      <v-chip v-if="index < 2">
+        <span>{{ item.text }}</span>
+      </v-chip>
+      <span v-if="index === 2" class="grey--text caption"
+        >(+{{ selectedHeaders.length - 2 }} others)</span
+      >
+    </template>
+  </v-select>
 </template>
 
 <script>
@@ -67,6 +80,12 @@ export default {
   computed: {
     optional() {
       return this.$store.state.optionalDisplay;
+    },
+    headers() {
+      return this.$store.state.headers;
+    },
+    showHeaders() {
+      return this.headers.filter((s) => this.selectedHeaders.includes(s));
     },
   },
 };

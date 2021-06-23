@@ -1,152 +1,45 @@
-<!--<template>
-  <v-card>
-    <v-card-title>
-      Employees
-      <v-spacer></v-spacer>
-      <v-text-field
-        v-model="search"
-        append-icon="mdi-magnify"
-        label="Search"
-        outlined
-        hide-details
-      ></v-text-field>
-    </v-card-title>
-    <v-data-table
-      :headers="headers"
-      :items="desserts"
-      :search="search"
-      show-select
-    ></v-data-table>
-  </v-card>
-</template>
-
-<script>
-export default {
-  data() {
-    return {
-      search: "",
-      headers: [
-        {
-          text: "STATUS",
-          align: "start",
-          value: "name",
-        },
-        { text: "NAME", value: "calories" },
-        { text: "PHONE", value: "fat" },
-        { text: "EMAIL", value: "carbs" },
-        { text: "NUMBER", value: "protein" },
-        { text: "Iron (%)", value: "iron" },
-      ],
-      desserts: [
-        {
-          name: "Frozen Yogurt",
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-          iron: "1%",
-        },
-        {
-          name: "Ice cream sandwich",
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
-          iron: "1%",
-        },
-        {
-          name: "Eclair",
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
-          iron: "7%",
-        },
-        {
-          name: "Cupcake",
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-          iron: "8%",
-        },
-        {
-          name: "Gingerbread",
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-          iron: "16%",
-        },
-        {
-          name: "Jelly bean",
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-          iron: "0%",
-        },
-        {
-          name: "Lollipop",
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-          iron: "2%",
-        },
-        {
-          name: "Honeycomb",
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-          iron: "45%",
-        },
-        {
-          name: "Donut",
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-          iron: "22%",
-        },
-        {
-          name: "KitKat",
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-          iron: "6%",
-        },
-      ],
-    };
-  },
-};
-
-</script>
-
-<style></style>-->
-
 <template>
   <v-card>
+    <v-card-title>
+      <div>
+        <v-select
+          v-model="selectedHeaders"
+          :items="headers"
+          label="Select Columns"
+          multiple
+          outlined
+          return-object
+        >
+          <template v-slot:selection="{ item, index }">
+            <v-chip v-if="index < 2">
+              <span>{{ item.text }}</span>
+            </v-chip>
+            <span v-if="index === 2" class="grey--text caption"
+              >(+{{ selectedHeaders.length - 2 }} others)</span
+            >
+          </template>
+        </v-select>
+
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          outlined
+          hide-details
+        ></v-text-field>
+      </div>
+    </v-card-title>
     <v-data-table
-      :headers="headers"
+      :headers="showHeaders"
       :items="desserts"
       sort-by="calories"
       class="elevation-1"
       :search="search"
+      item-key="name"
       show-select
     >
-      <!-- <template v-slot:top>
+      <template v-slot:top>
         <v-toolbar flat>
-          <v-text-field
-            v-model="search"
-            append-icon="mdi-magnify"
-            label="Search"
-            outlined
-            hide-details
-          ></v-text-field>
-
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="500px">
@@ -219,18 +112,15 @@ export default {
             </v-card>
           </v-dialog>
         </v-toolbar>
-      </template> -->
+      </template>
 
-      <!-- <template v-slot:[`item.actions`]="{ item }">
+      <template v-slot:[`item.actions`]="{ item }">
         <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
         <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
       </template>
       <template v-slot:no-data>
         <v-btn color="primary" @click="initialize"> Reset </v-btn>
-      </template> -->
-      
-
-      
+      </template>
     </v-data-table>
   </v-card>
 </template>
@@ -241,20 +131,22 @@ export default {
     search: "",
     dialog: false,
     dialogDelete: false,
-    // headers: [
-    //   {
-    //     text: "STATUS",
-    //     align: "start",
-    //     sortable: false,
-    //     value: "status",
-    //   },
-    //   { text: "NAME", value: "name" },
-    //   { text: "EMAIL", value: "email" },
-    //   { text: "PHONE", value: "phone" },
-    //   { text: "NUMBER", value: "number" },
-    //   { text: "OPTIONS", value: "actions", sortable: false },
-    // ],
+    headers: [],
+    headersMap: [
+      {
+        text: "STATUS",
+        align: "start",
+        sortable: false,
+        value: "status",
+      },
+      { text: "NAME", value: "name" },
+      { text: "EMAIL", value: "email" },
+      { text: "PHONE", value: "phone" },
+      { text: "NUMBER", value: "number" },
+      { text: "OPTIONS", value: "actions", sortable: false },
+    ],
     desserts: [],
+    selectedHeaders: [],
     editedIndex: -1,
     editedItem: {
       name: "",
@@ -276,18 +168,9 @@ export default {
     formTitle() {
       return this.editedIndex === -1 ? "New Item" : "Edit Item";
     },
-    headers() {
-      return this.$store.state.headers;
+    showHeaders() {
+      return this.headers.filter((s) => this.selectedHeaders.includes(s));
     },
-    optional() {
-      return this.$store.state.optionalDisplay;
-    },
-    // computedheaders() {
-    //   if(this.$store.state.optionalDisplay.status === false) {
-    //     headers = headers.splice(0,1)
-    //   }
-    //   return 0
-    // }
   },
 
   watch: {
@@ -301,6 +184,8 @@ export default {
 
   created() {
     this.initialize();
+    this.headers = Object.values(this.headersMap);
+    this.selectedHeaders = this.headers;
   },
 
   methods: {
