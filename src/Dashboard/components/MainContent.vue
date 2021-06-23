@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container style="padding: 5% 0% 0% 5% !important">
+    <v-container>
       <v-row>
         <router-view></router-view>
       </v-row>
@@ -12,4 +12,13 @@
 export default {};
 </script>
 
-<style></style>
+<style>
+.container {
+  padding: 5% 0% 0% 5%;
+}
+@media only screen and (max-width: 739px) {
+  .container {
+    padding: 15% 0% 0% 10%;
+  }
+}
+</style>
