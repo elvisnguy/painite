@@ -84,9 +84,6 @@ export default {
     headers() {
       return this.$store.state.headers;
     },
-    showHeaders() {
-      return this.headers.filter((s) => this.selectedHeaders.includes(s));
-    },
   },
 };
 </script>

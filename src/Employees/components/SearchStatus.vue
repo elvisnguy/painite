@@ -7,6 +7,7 @@ export default {
   data() {
     return {
       items: ["All", "Enable", "Disable"],
+      props: ['item']
     };
   },
 };

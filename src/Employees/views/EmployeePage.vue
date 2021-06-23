@@ -13,9 +13,9 @@
         <SelectStatus />
       </v-col>
 
-      <v-col cols="12" md="1">
+      <!-- <v-col cols="12" md="1">
         <OptionalDisplay />
-      </v-col>
+      </v-col> -->
 
       <!-- <v-col cols="12" md="1">
         <SelectFilter />
@@ -43,7 +43,7 @@
 import ButtonCreate from "../components/CreateButton.vue";
 // import SelectMaximum from "../components/MaximumItem.vue";
 // import Search from "../components/Search.vue";
-import OptionalDisplay from "../components/OptionalDisplay.vue";
+// import OptionalDisplay from "../components/OptionalDisplay.vue";
 import SelectStatus from "../components/SearchStatus.vue";
 import EmployeeList from "../components/Employees.vue";
 export default {
@@ -51,7 +51,7 @@ export default {
     ButtonCreate,
     // SelectMaximum,
     // Search,
-    OptionalDisplay,
+    // OptionalDisplay,
     SelectStatus,
     EmployeeList,
   },
