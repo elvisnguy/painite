@@ -10,9 +10,22 @@
   >
     <v-img :src="image" height="100%">
       <v-layout class="fill-height" tag="v-list" column>
+        <div class="mt-2"></div>
+        <v-btn
+          style="margin: 0px auto"
+          dark
+          color="rgb(242, 179, 52)"
+          id="company-btn"
+          class="d-flex justify-center"
+        >
+          <h5 style="color: white">Company</h5>
+        </v-btn>
+        <div class="mt-3"></div>
         <v-divider />
         <div class="mt-16"></div>
-
+        <v-btn color="rgb(242, 179, 52)" fab dark small class="move-btn">
+          <v-icon>mdi-chevron-left</v-icon>
+        </v-btn>
         <router-link
           v-for="(link, i) in links"
           :key="i"
@@ -87,5 +100,24 @@ export default {
   padding: 18px 10px;
   position: relative;
   text-decoration: none;
+}
+.move-btn {
+  position: absolute;
+  top: 100px;
+  right: -20px;
+}
+#company-btn {
+  width: 70px !important;
+  height: 50px !important;
+}
+.v-navigation-drawer {
+  overflow: unset !important;
+}
+.v-responsive {
+  overflow: unset !important;
+}
+.v-navigation-drawer__content {
+  overflow-y: unset !important;
+  overflow-x: unset !important;
 }
 </style>
