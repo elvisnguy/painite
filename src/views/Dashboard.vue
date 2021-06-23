@@ -2,19 +2,19 @@
   <div>
     <AppBar />
     <NavBar />
-    <v-container>
-      <v-spacer></v-spacer>
-    </v-container>
+    <MainContent />
   </div>
 </template>
 
 <script>
-import AppBar from "@/components/AppBar.vue";
-import NavBar from "@/components/NavBar.vue";
+import AppBar from "@/Dashboard/components/AppBar.vue";
+import NavBar from "@/Dashboard/components/NavBar.vue";
+import MainContent from "@/Dashboard/components/MainContent.vue";
 export default {
   components: {
     AppBar,
     NavBar,
+    MainContent,
   },
 };
 </script>

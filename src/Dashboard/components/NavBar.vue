@@ -4,7 +4,7 @@
     color="rgb(79,37,102)"
     floating
     persistent
-    mobile-break-point="991"
+    mobile-breakpoint="991"
     width="210"
     absolute
   >
@@ -44,32 +44,32 @@ export default {
         text: "Dashboard",
       },
       {
-        to: "companies/{{companyId}}/sales/",
+        to: "",
         icon: "mdi-currency-usd",
         text: "Sales",
       },
       {
-        to: "companies/{{companyId}}/contacts/",
+        to: "/dashboard/contacts",
         icon: "mdi-domain",
         text: "Contacts",
       },
       {
-        to: "companies/{{companyId}}/products/",
+        to: "/dashboard/products",
         icon: "mdi-cube-outline",
         text: "Products",
       },
       {
-        to: "companies/{{companyId}}/fees/",
+        to: "",
         icon: "mdi-calculator-variant-outline",
         text: "Fees",
       },
       {
-        to: "companies/{{companyId}}/employees/",
+        to: "",
         icon: "mdi-account-supervisor",
         text: "Employees",
       },
       {
-        to: "companies/{{companyId}}/setting/",
+        to: "",
         icon: "mdi-cog",
         text: "Company setting",
       },
@@ -88,5 +88,4 @@ export default {
   position: relative;
   text-decoration: none;
 }
-
 </style>

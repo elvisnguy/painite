@@ -1,20 +1,11 @@
 <template>
   <div>
-    <AppBar />
-    <NavBar />
-    <v-container>
-      <v-row></v-row>
-    </v-container>
+    <h1>Contacts</h1>
   </div>
 </template>
 
 <script>
-import AppBar from "@/components/AppBar.vue";
-import NavBar from "@/components/NavBar.vue";
-export default {
-  components: {
-    AppBar,
-    NavBar,
-  },
-};
+export default {};
 </script>
+
+<style lang="scss" scoped></style>
