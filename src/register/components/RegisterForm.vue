@@ -68,6 +68,7 @@ export default {
     emailRules: [
       (v) => !!v || "E-mail is required",
       (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+      (v) => !/[ ]/.test(v) || "No spaces allowed",
     ],
     rules: {
       required: (value) => !!value || "This field is required.",
