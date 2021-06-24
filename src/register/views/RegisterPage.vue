@@ -31,8 +31,8 @@ export default {
 
 <style scoped>
 #form-container {
-  width: 850px;
-  height: 668px;
+  max-width: 850px;
+  max-height: 668px;
   background: #ffffff;
   border-radius: 16px;
 }
