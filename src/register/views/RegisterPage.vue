@@ -4,7 +4,7 @@
       <v-row class="register-row" justify="center">
         <v-col cols="12" sm="12" md="8" lg="8">
           <h1>Register</h1>
-          <register-form @userInfor="register"></register-form>
+          <register-form @user-infor="register"></register-form>
         </v-col>
       </v-row>
     </v-container>

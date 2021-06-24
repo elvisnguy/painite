@@ -82,7 +82,7 @@ export default {
       this.$refs.signUpForm.validate();
     },
     onSubmit() {
-      this.$emit("userInfor", this.userInfor);
+      this.$emit("user-infor", this.userInfor);
     },
   },
   computed: {
