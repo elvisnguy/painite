@@ -43,9 +43,9 @@
       color="#FFBF3F"
       v-on:click="validateForm"
       type="submit"
-      :disabled="errorMessage == ''"
+      :disabled="errorMessage == '' && !formValadity"
     >
-      <span v-if="errorMessage != ''">SIGN UP</span>
+      <span v-if="errorMessage != '' && !formValadity">SIGN UP</span>
       <span v-if="errorMessage == ''">Signup Successfully</span>
     </v-btn>
     <div class="form-footer">
@@ -57,6 +57,7 @@
 
 <script>
 export default {
+  props: ["errorMessage"],
   data: () => ({
     showPassword: false,
     userInfor: {
@@ -82,12 +83,7 @@ export default {
       this.$refs.signUpForm.validate();
     },
     onSubmit() {
-      this.$emit("user-infor", this.userInfor);
-    },
-  },
-  computed: {
-    errorMessage() {
-      return this.$store.state.registerModule.errorMessage;
+      this.$emit("register-user", this.userInfor);
     },
   },
 };

@@ -4,7 +4,10 @@
       <v-row class="register-row" justify="center">
         <v-col cols="12" sm="12" md="8" lg="8">
           <h1>Register</h1>
-          <register-form @user-infor="register"></register-form>
+          <RegisterForm
+            @register-user="register"
+            :errorMessage="errorMessageGetter"
+          />
         </v-col>
       </v-row>
     </v-container>
@@ -13,6 +16,7 @@
 
 <script>
 import RegisterForm from "../components/RegisterForm.vue";
+import { mapGetters } from "vuex";
 export default {
   components: { RegisterForm },
   data: () => ({}),
@@ -25,6 +29,11 @@ export default {
         password: value.password,
       });
     },
+  },
+  computed: {
+    ...mapGetters({
+      errorMessageGetter: "registerModule/errorMessageGetter",
+    }),
   },
 };
 </script>

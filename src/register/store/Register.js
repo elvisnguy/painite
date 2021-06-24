@@ -1,7 +1,7 @@
 import { HTTP } from "../../http-common";
 import router from "../../router";
 
-export const registerModule = {
+export default {
   namespaced: true,
   state: {
     errorMessage: "null",
@@ -13,18 +13,27 @@ export const registerModule = {
   },
   actions: {
     register({ commit }, credentials) {
-      commit("SET_ERROR_MESSAGE", "");
+      commit("SET_ERROR_MESSAGE", "null");
       return HTTP.post("/auth/register", credentials)
         .then(() => {
-          commit("SET_ERROR_MESSAGE", "null");
-          alert(
-            "Congratulations! You Are Successfully Signed Up!! Press OK to login !"
+          commit("SET_ERROR_MESSAGE", "");
+
+          setTimeout(
+            () =>
+              alert(
+                "Congratulations! You Are Successfully Signed Up!! Press OK to login !"
+              ),
+            500
           );
-          router.push({ path: "auth/signin" });
+          setTimeout(() => router.push({ name: "Signin" }), 500);
         })
+
         .catch((error) => {
           commit("SET_ERROR_MESSAGE", error.response.data.errors[0].message);
         });
     },
+  },
+  getters: {
+    errorMessageGetter: (state) => state.errorMessage,
   },
 };
