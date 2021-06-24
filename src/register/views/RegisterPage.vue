@@ -18,7 +18,7 @@ export default {
   data: () => ({}),
   methods: {
     register(value) {
-      this.$store.dispatch("register", {
+      this.$store.dispatch("registerModule/register", {
         firstName: value.firstName,
         lastName: value.lastName,
         username: value.email,

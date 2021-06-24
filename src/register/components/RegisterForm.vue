@@ -55,7 +55,6 @@
 </template>
 
 <script>
-//import { mapState } from 'vuex'
 export default {
   data: () => ({
     showPassword: false,
@@ -86,7 +85,7 @@ export default {
   },
   computed: {
     errorMessage() {
-      return this.$store.state.errorMessage;
+      return this.$store.state.registerModule.errorMessage;
     },
   },
 };
