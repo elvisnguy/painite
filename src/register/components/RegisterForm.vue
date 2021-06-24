@@ -43,6 +43,7 @@
       color="#FFBF3F"
       v-on:click="validateForm"
       type="submit"
+      :disabled="errorMessage == ''"
     >
       <span v-if="errorMessage != ''">SIGN UP</span>
       <span v-if="errorMessage == ''">Signup Successfully</span>
