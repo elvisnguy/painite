@@ -12,6 +12,6 @@ export default {};
 
 <style>
 .container {
-  padding: 5% 0% 0% 5%;
+  padding: 5rem 0 0 5rem;
 }
 </style>
