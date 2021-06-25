@@ -3,6 +3,10 @@
     <v-alert v-if="errorMessage && errorMessage != 'null'" type="error">
       {{ errorMessage }}
     </v-alert>
+    <v-alert v-if="errorMessage == ''" type="success">
+      Congratulations! You Are Successfully Signed Up!! You can
+      <router-link to="/auth/signin">Sign in</router-link> now !
+    </v-alert>
     <v-text-field
       label="Email/User Name"
       type="email"
@@ -46,7 +50,15 @@
       :disabled="errorMessage == '' && !formValadity"
     >
       <span v-if="errorMessage != '' && !formValadity">SIGN UP</span>
-      <span v-if="errorMessage == ''">Signup Successfully</span>
+      <span v-if="errorMessage == ''"
+        >Signing Up
+        <v-progress-circular
+          :size="20"
+          width="3"
+          color="white"
+          indeterminate
+        ></v-progress-circular
+      ></span>
     </v-btn>
     <div class="form-footer">
       <p>By clicking here you agree to our <a>Customer Agreement</a></p>
@@ -94,5 +106,9 @@ export default {
   text-align: center;
   margin-top: 30px;
   margin-bottom: 30px;
+}
+span {
+  color: #ffff;
+  font-size: 16px;
 }
 </style>
