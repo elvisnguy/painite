@@ -19,6 +19,11 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/companies",
+    name: "Companies",
+    component: () => import("../Companies/views/CompaniesDashboard.vue"),
+  },
 ];
 
 const router = new VueRouter({

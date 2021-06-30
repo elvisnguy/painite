@@ -1,0 +1,22 @@
+<template>
+  <div>
+    <v-col>
+      <v-text-field
+        flat
+        solo
+        outlined
+        hide-no-data
+        hide-details
+        append-icon="mdi-magnify"
+        label="Search"
+      >
+      </v-text-field>
+    </v-col>
+  </div>
+</template>
+
+<script>
+export default {};
+</script>
+
+<style lang="scss" scoped></style>
