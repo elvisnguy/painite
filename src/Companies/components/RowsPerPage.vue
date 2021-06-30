@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-col class="d-flex align-baseline">
+    <v-row class="d-flex align-baseline">
       <span>Row per page:</span>
       <div class="mr-2"></div>
       <v-select
@@ -10,7 +10,7 @@
         outlined
         :menu-props="{ top: true, offsetY: true }"
       ></v-select>
-    </v-col>
+    </v-row>
   </div>
 </template>
 

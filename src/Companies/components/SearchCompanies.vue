@@ -1,17 +1,15 @@
 <template>
   <div>
-    <v-col>
-      <v-text-field
-        flat
-        solo
-        outlined
-        hide-no-data
-        hide-details
-        append-icon="mdi-magnify"
-        label="Search"
-      >
-      </v-text-field>
-    </v-col>
+    <v-text-field
+      flat
+      solo
+      outlined
+      hide-no-data
+      hide-details
+      append-icon="mdi-magnify"
+      label="Search"
+    >
+    </v-text-field>
   </div>
 </template>
 

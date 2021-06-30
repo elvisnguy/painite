@@ -1,10 +1,8 @@
 <template>
   <div>
-    <v-col>
-      <v-btn fab dark small color="#fff" class="filter-company">
-        <v-icon color="#f2b334"> {{ icons.mdiCogOutline }} </v-icon>
-      </v-btn>
-    </v-col>
+    <v-btn fab dark small color="#fff" class="filter-company">
+      <v-icon color="#f2b334"> {{ icons.mdiCogOutline }} </v-icon>
+    </v-btn>
   </div>
 </template>
 
